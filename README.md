@@ -7,6 +7,7 @@
 - [制作工程と比較方法](docs/workflow.md)
 - [無料ツールの選定と対応状況](docs/free-tools.md)
 - [論文・実制作から応用できる知見](docs/research-notes.md)
+- [VRChat・Resonite への持ち込み](docs/social-vr/README.md)（Unity 作業・両対応の注意点。機械可読版は [facts.yaml](docs/social-vr/facts.yaml)）
 - [学習資料・参考資料の一覧](docs/learning-resources.md)
 
 ## 現在の範囲
