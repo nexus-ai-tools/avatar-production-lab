@@ -1,0 +1,151 @@
+# ソーシャルVR（VRChat・Resonite）向けアバターの事実一覧
+# AI・スクリプトが読むための正本。文章版は同じフォルダの *.md。
+# checked: この値を出典で確かめた日。値を使う前に checked から30日を超えていたら出典を見直す。
+# status: official=公式資料 / community=コミュニティ資料 / unverified=未確認
+schema_version: 1
+checked: 2026-11-07
+
+vrchat:
+  os:
+    client_pc: windows
+    creator_companion: windows
+    note: Mac からの非公式アップロード手段は扱わない
+    source: https://vcc.docs.vrchat.com/guides/getting-started/
+    status: official
+  unity:
+    required_version: 2022.3.22f1
+    unity6_for_creators: not_supported   # 2026-09 時点。移行日未発表
+    page_updated: 2025-10-03
+    source:
+      - https://creators.vrchat.com/sdk/upgrade/current-unity-version/
+      - https://mixed-news.com/en/vrchat-quest-open-beta-unity-6-creators-stay-unity-2022/
+    status: official
+  unity_license:
+    personal: free
+    personal_threshold_usd: 200000   # 売上＋資金調達
+    source: https://unity.com/en/products/pricing-updates
+    status: official
+  sdk:
+    major: 3
+    latest_seen: 3.10.6
+    note: 3.10.3 は 2026-04-16 リリース
+    source: https://creators.vrchat.com/releases/release-3-10-3
+    status: official
+  upload_requirement:
+    trust_rank_min: New User
+    build_and_test_without_rank: true
+    source: https://help.vrchat.com/hc/en-us/articles/360062658813-Why-can-t-I-upload-avatars-or-worlds-yet
+    status: official
+  performance_ranks:
+    page_updated: 2026-10-21
+    source: https://creators.vrchat.com/avatars/avatar-performance-ranking-system/
+    status: official
+    order: [excellent, good, medium, poor]
+    pc:
+      triangles: [32000, 70000, 70000, 70000]
+      texture_memory_mb: [40, 75, 110, 150]
+      skinned_meshes: [1, 2, 8, 16]
+      material_slots: [4, 8, 16, 32]
+      physbone_components: [4, 8, 16, 32]
+      physbone_transforms: [16, 64, 128, 256]
+      bones: [75, 150, 256, 400]
+    mobile:
+      triangles: [7500, 10000, 15000, 20000]
+      texture_memory_mb: [10, 18, 25, 40]
+      skinned_meshes: [1, 1, 2, 2]
+      material_slots: [1, 1, 2, 4]
+      physbone_components: [0, 4, 6, 8]
+      physbone_transforms: [0, 16, 32, 64]
+      bones: [75, 90, 150, 150]
+  size_limits:
+    page_updated: 2026-10-07
+    pc: {download_mb: 200, uncompressed_mb: 500}
+    android: {download_mb: 10, uncompressed_mb: 40}
+    ios: unverified
+    source: https://creators.vrchat.com/avatars/avatar-size-limits
+    status: official
+  mobile_shaders:
+    allowed_family: VRChat/Mobile
+    examples: [Toon Standard, Toon Lit, Standard Lite]
+    not_allowed_examples: [lilToon, Poiyomi, MToon]
+    source: https://creators.vrchat.com/platforms/android/quest-content-limitations/
+    status: official
+  cross_platform:
+    same_blueprint_id: true
+    essential_bone_paths_must_match: true
+    ios_falls_back_to_android: experimental
+    missing_platform_shows: impostor
+    impostor: {auto_generated_on_upload: true, humanoid_only: true, manual_regen_per_day: 10}
+    page_updated: 2026-09-15
+    source:
+      - https://creators.vrchat.com/platforms/android/cross-platform-setup
+      - https://wiki.vrchat.com/wiki/Impostors
+    status: official
+  vrm_converters:
+    - name: VRM Converter for VRChat
+      vrm: "0.x"
+      price_jpy: 0
+      install: VCC community repo https://esperecyan.github.io/VRMConverterForVRChat/registry.json
+      source: https://pokemori.booth.pm/items/1025226
+      status: community
+    - name: VRM1.0 to VRChat Converter
+      vrm: "1.0 (VRoid Studio 書き出しのみ)"
+      price_jpy: 0
+      version: "0.3045 (2026-06-10)"
+      requires: {unity: "2022.3.x", univrm: "0.131.0", liltoon: optional}
+      note: 開発停止、後継 VRM2VRC（詳細未確認）
+      source: https://booth.pm/ja/items/8294490
+      status: community
+  pc_shaders:
+    - {name: lilToon, license: MIT, price_jpy: 0, source: "https://booth.pm/ja/items/3087170"}
+
+resonite:
+  os: [windows, linux]
+  macos: false
+  store: steam
+  source_os: https://wiki.resonite.com/Installing_Resonite
+  pricing:
+    personal: free
+    personal_revenue_limit_usd: 100000   # 直近12か月
+    free_cloud_storage_gb: 1
+    vtuber_streaming_terms: unverified
+    source: https://resonite.com/licensing
+    status: official
+  trust_rank_needed: false
+  unity_needed: false
+  import_formats:
+    recommended: [glb, gltf]
+    also: [fbx, blend, resonitepackage, unitypackage]
+    vrm: "0.x を .glb に改名、または ResoPon VRM で ResonitePackage に変換"
+    unsupported: [draco_compression]
+    texture: {recommended_px: 2048, formats: [webp, png]}
+    source: https://wiki.resonite.com/Avatar_Importing_Guide
+    page_updated: 2026-07-22
+    status: community
+  rig:
+    pose: [T, A]
+    forward_axis: +Z
+    chain: [Hips, Spine, Chest, Neck, Head]
+    side_suffix: [L, R]
+    fingers: {min_fingers: 3, segments: "2-4", thumb_required: true, naming: "index1.L"}
+    exclude_from_ik_tag: "<NoIK>"
+    source: https://wiki.resonite.com/Humanoid_Rig_Requirements_for_IK
+    page_updated: 2026-04-21
+    status: community
+  materials:
+    custom_shaders: false
+    toon_equivalent: XiexeToon
+    default_recommended: "PBS (Prefer Specular)"
+  converters:
+    - {name: ResoPon VRM, input: VRM, output: ResonitePackage, os: windows, status: community, source: "https://wiki.resonite.com/ResoPon_VRM"}
+    - {name: "Modular Avatar - Resonite support", input: Unity avatar, output: ResonitePackage, maturity: experimental, toggles_menus: not_supported, source: "https://modular-avatar.nadena.dev/docs/experimental-features/resonite-support"}
+    - {name: ResoniteImportHelper, archived: 2026-01-01, use: false, source: "https://github.com/KisaragiEffective/ResoniteImportHelper"}
+    - {name: Resonite UnitySDK, note: "PhysBones・トグル・アニメ非対応（wiki 記載時 v0.0.8）", source: "https://wiki.resonite.com/Tutorial:UnitySDK"}
+
+vroid:
+  latest_seen: "2.10.0 (2026-01-29)"
+  vrm_export_options: ["0.0", "1.0"]
+  recommended_for_both: "0.0"
+  source:
+    - https://cgworld.jp/flashnews/01-202602-VRoidStudio.html
+    - https://vroid.com/en/studio/notice/62qSFvhlfsQMgFY7xzqeIH
